@@ -3,6 +3,12 @@ package com.careconnect.careconnect.controller;
 import com.careconnect.careconnect.repository.UserRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.careconnect.careconnect.model.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 
 
 @RestController
@@ -16,4 +22,14 @@ public class UserController {
 
         this.userRepository = userRepository;
     }
+
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+
+    public User registerUser(@RequestBody User user){
+        return userRepository.save(user);
+    }
+
+
+
 }
