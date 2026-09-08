@@ -3,7 +3,7 @@ package com.careconnect.careconnect.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "users")
 
 public class User {
 
@@ -12,13 +12,13 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private int mobileNumber;
+    private String mobileNumber;
 
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
 
-    public User(Long id, String firstName, String lastName, int mobileNumber, String email, String password) {
+    public User(Long id, String firstName, String lastName, String mobileNumber, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,11 +51,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(int mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
