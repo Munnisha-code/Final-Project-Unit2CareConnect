@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.careconnect.careconnect.model.User;
 import org.springframework.http.HttpStatus;
 
+
 import java.util.List;
 
 
@@ -50,4 +51,14 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
 
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser (@PathVariable Long id){
+
+        if(!userRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+    userRepository.deleteById(id);
+    return ResponseEntity.noContent().build();
+   }
 }

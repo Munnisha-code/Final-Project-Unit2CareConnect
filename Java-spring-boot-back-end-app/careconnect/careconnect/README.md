@@ -77,3 +77,24 @@ I added the user fields required for registration:
 46. I restarted the Spring Boot application and successfully retrieved the registered users through the GET endpoint.
 47. I committed the POST registration feature to Git with the message:`Add user registration POST endpoint`
 48. I committed the GET users feature to Git with the message:`Add get all users endpoint`
+49. I created a PUT endpoint to update an existing user by ID.
+50. I mapped the update endpoint to:`PUT /api/users/{id}`
+51. I used the `@PathVariable` annotation to receive the user ID from the URL.
+52. I used the `@RequestBody` annotation to receive the updated user details as JSON.
+53. I used `userRepository.findById(id)` to find the existing user.
+54. I updated the user's first name, last name, mobile number, email, and password.
+55. I used `userRepository.save(existingUser)` to save the updated user details in the database.
+56. I tested the PUT endpoint using Postman with the following URL:`http://localhost:8080/api/users/1`
+57. I confirmed that the user details were successfully updated in the database.
+58. I created a DELETE endpoint to remove an existing user by ID.
+59. I mapped the delete endpoint to:`DELETE /api/users/{id}`
+60. I used `userRepository.existsById(id)` to check whether the user exists.
+61. I used `userRepository.deleteById(id)` to delete the selected user from the database.
+62. I tested the DELETE endpoint using Postman with the following URL:`http://localhost:8080/api/users/1`
+63. I confirmed that the selected user was successfully deleted from the database.
+64. The current backend supports the basic CRUD operations:
+    Create user using POST.
+    Read users using GET.
+    Update user using PUT.
+    Delete user using DELETE.
+65. 
