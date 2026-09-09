@@ -1,15 +1,12 @@
 package com.careconnect.careconnect.controller;
 
 import com.careconnect.careconnect.repository.UserRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.careconnect.careconnect.model.User;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
@@ -36,5 +33,21 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(
+            @PathVariable Long id,
+            @RequestBody User updatedUser) {
+        return userRepository.findById(id).map(existingUser -> {
+            existingUser.setFirstName(updatedUser.getFirstName());
+            existingUser.setLastName(updatedUser.getLastName());
+            existingUser.setMobileNumber(updatedUser.getMobileNumber());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setPassword(updatedUser.getPassword());
 
+            User savedUser = userRepository.save(existingUser);
+            return ResponseEntity.ok(savedUser);
+        })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+
+    }
 }
