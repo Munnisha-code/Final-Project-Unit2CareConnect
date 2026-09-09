@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
@@ -30,6 +31,10 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    @GetMapping
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
 
 
 }

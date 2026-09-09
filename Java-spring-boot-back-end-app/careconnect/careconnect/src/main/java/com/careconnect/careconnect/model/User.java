@@ -18,6 +18,9 @@ public class User {
     private String email;
     private String password;
 
+    public User(){
+
+    }
     public User(Long id, String firstName, String lastName, String mobileNumber, String email, String password) {
         this.id = id;
         this.firstName = firstName;
