@@ -31,15 +31,15 @@ public class TrustedContactController {
         return repository.save(contact);
     }
 
-    @PutMapping("{/id}")
+    @PutMapping("/{id}")
     public TrustedContact updateContact(
             @PathVariable Long id,
             @RequestBody TrustedContact contact){
-      contact.setID(id);
+      contact.setid(id);
       return repository.save(contact);
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public void deleteContact(@PathVariable Long id){
         repository.deleteById(id);
     }

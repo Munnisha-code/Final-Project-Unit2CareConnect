@@ -11,7 +11,7 @@ public class TrustedContact {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
     private String name;
     private String mobileNumber;
     private String relationship;
@@ -27,11 +27,11 @@ public class TrustedContact {
     }
 
     public Long getID() {
-        return ID;
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setid(Long id) {
+        this.id = id;
     }
 
     public String getName() {
