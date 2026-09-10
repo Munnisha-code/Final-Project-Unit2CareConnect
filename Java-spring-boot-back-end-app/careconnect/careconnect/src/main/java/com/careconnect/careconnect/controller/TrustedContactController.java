@@ -31,6 +31,14 @@ public class TrustedContactController {
         return repository.save(contact);
     }
 
+    @PutMapping("{/id}")
+    public TrustedContact updateContact(
+            @PathVariable Long id,
+            @RequestBody TrustedContact contact){
+      contact.setID(id);
+      return repository.save(contact);
+    }
+
 
 
 }
