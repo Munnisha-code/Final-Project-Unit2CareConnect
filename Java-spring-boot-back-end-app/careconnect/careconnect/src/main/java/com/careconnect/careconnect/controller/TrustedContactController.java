@@ -3,10 +3,7 @@ package com.careconnect.careconnect.controller;
 
 import com.careconnect.careconnect.model.TrustedContact;
 import com.careconnect.careconnect.repository.TrustedContactRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,12 @@ public class TrustedContactController {
     @GetMapping
     public List<TrustedContact> getAllContacts(){
         return repository.findAll();
+    }
+
+    @PostMapping
+    public TrustedContact createContact(
+            @RequestBody TrustedContact contact){
+        return repository.save(contact);
     }
 
 
