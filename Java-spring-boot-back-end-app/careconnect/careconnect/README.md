@@ -98,3 +98,88 @@ I added the user fields required for registration:
     Update user using PUT.
     Delete user using DELETE.
 65. 
+# Trusted Contact Model, Repository, and Controller
+66. I created a `TrustedContact` entity class inside the `model` package.
+
+67. I added the `@Entity` annotation to the `TrustedContact` class so that it could be mapped to a database table.
+
+68. I added the following fields required for trusted contacts:
+    - `id`
+    - `name`
+    - `mobileNumber`
+    - `relationship`
+
+69. I configured the `id` field as the primary key and used automatic ID generation.
+
+70. I added a no-argument constructor to the `TrustedContact` entity because JPA and Hibernate require a default constructor.
+
+71. I added getters and setters for all `TrustedContact` entity fields.
+
+72. I created a `TrustedContactRepository` interface inside the `repository` package.
+
+73. I extended `JpaRepository<TrustedContact, Long>` in the `TrustedContactRepository` interface.
+
+74. By extending `JpaRepository`, I enabled built-in database operations for saving, finding, updating, and deleting trusted contacts.
+
+75. I created a `TrustedContactController` class inside the `controller` package.
+
+76. I added the `@RestController` annotation to the `TrustedContactController` class.
+
+77. I added the base request mapping `/api/trusted-contacts` to the controller.
+
+78. I injected `TrustedContactRepository` into the `TrustedContactController` using constructor injection.
+
+79. I fixed the entity ID naming and setter method to use `id`, `getId()`, and `setId()`.
+
+80. I verified that the Spring Boot application could detect the `TrustedContact` entity, repository, and controller successfully.
+
+## Create and Test Trusted Contact CRUD APIs
+
+81. I created a POST endpoint to add a new trusted contact.
+
+82. I mapped the create endpoint to:`POST /api/trusted-contacts`
+
+83. I used the `@RequestBody` annotation to receive trusted contact information as JSON.
+
+84. I used `trustedContactRepository.save(contact)` to save the trusted contact details in the MySQL database.
+
+85. I tested the POST endpoint using Postman with the following JSON request:
+
+```json{
+  "name": "Sam",
+  "mobileNumber": "5551234567",
+  "relationship": "Sister"
+}
+```
+86. I created a GET endpoint to retrieve all trusted contacts.
+
+87. I mapped the GET endpoint to:`GET /api/trusted-contacts`
+
+88. I used `trustedContactRepository.findAll()` to retrieve all trusted contacts from the database.
+
+89. I created a PUT endpoint to update an existing trusted contact by ID.
+
+90. I mapped the update endpoint to:`PUT /api/trusted-contacts/{id}`
+
+91. I used the `@PathVariable` annotation to receive the trusted contact ID from the URL.
+
+92. I used the `@RequestBody` annotation to receive the updated trusted contact details as JSON.
+
+93. I used `contact.setId(id)` and `trustedContactRepository.save(contact)` to update the trusted contact.
+
+94. I tested the PUT endpoint using the following URL:`http://localhost:8080/api/trusted-contacts/1`
+
+95. I created a DELETE endpoint to remove an existing trusted contact by ID.
+
+96. I mapped the delete endpoint to:`DELETE /api/trusted-contacts/{id}`
+97. I used `trustedContactRepository.deleteById(id)` to delete the selected trusted contact from the database.
+
+98. I tested the DELETE endpoint using the following URL:`http://localhost:8080/api/trusted-contacts/1`
+
+99. I confirmed that the trusted contact was successfully added, retrieved, updated, and deleted from the MySQL database.
+100. The current backend supports the basic CRUD operations for trusted contacts:
+     - Create a trusted contact using POST.
+     - Read trusted contacts using GET.
+     - Update a trusted contact using PUT.
+     - Delete a trusted contact using DELETE.
+
