@@ -39,6 +39,10 @@ public class TrustedContactController {
       return repository.save(contact);
     }
 
+    @DeleteMapping("{/id}")
+    public void deleteContact(@PathVariable Long id){
+        repository.deleteById(id);
+    }
 
 
 }
