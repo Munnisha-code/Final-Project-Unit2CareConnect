@@ -5,14 +5,14 @@ import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import trustedContacts from '../mockData/trustedContacts';
+const API_URL = "http://Localhost:8080/api/trusted-contacts";
 
 
 function TrustedContactForm(){
 
     const navigate = useNavigate();
 
-    const [contacts, setContacts] = useState(trustedContacts);
+    const [contacts, setContacts] = useState([]);
 
 
 
