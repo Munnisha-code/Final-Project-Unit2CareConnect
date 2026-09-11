@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-
+const API_URL = "http://localhost:8080/api/trusted-contacts";
 
 
 function TrustedContactForm(){
@@ -35,14 +35,34 @@ const navigate = useNavigate();
 
         }
 
-     const saveContact = (id) => { 
-              
-        const updatedcontacts = contacts.map((contact) => contact.id === id ? 
-              
-             {...contact, saved:true} : contact );
+     const saveContact = async (id) => {
+  const contact = contacts.find((item) => item.id === id);
 
-             setContacts(updatedcontacts);
-     } 
+  if (
+    !contact.name.trim() || !contact.mobileNumber.trim() || !contact.relationship.trim()) {
+    alert("Please fill Name, Mobile Number, and Relationship");
+    return;
+  }
+
+  try {
+    const response = await fetch(API_URL, {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({name: contact.name, mobileNumber: contact.mobileNumber, relationship: contact.relationship })
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not save trusted contact");
+    }
+
+    const savedContact = await response.json();
+
+    const updatedContacts = contacts.map((item) => item.id === id ? {...savedContact, saved: true}: item);
+
+    setContacts(updatedContacts);
+  } 
+  catch (error) {
+    console.error("Error saving contact:", error);
+    alert("Contact was not saved. Please try again.");}
+};
 
      const editContact = (id) => {
            
