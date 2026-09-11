@@ -5,15 +5,21 @@ import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = "http://Localhost:8080/api/trusted-contacts";
+
 
 
 function TrustedContactForm(){
+const navigate = useNavigate();
 
-    const navigate = useNavigate();
+    const [contacts, setContacts] = useState([
+        { id: 1, name: "", mobileNumber: "", relationship: "", saved: false },
+  { id: 2, name: "", mobileNumber: "", relationship: "", saved: false },
+  { id: 3, name: "", mobileNumber: "", relationship: "", saved: false },
+  { id: 4, name: "", mobileNumber: "", relationship: "", saved: false },
+  { id: 5, name: "", mobileNumber: "", relationship: "", saved: false } 
+    ]);
 
-    const [contacts, setContacts] = useState([]);
-
+  
 
 
     // Update individual contact details
@@ -62,7 +68,7 @@ function TrustedContactForm(){
 
         <div className="trusted-contact-container" >
 
-            <h3 className='trusted-title' > Add Trusted Contacts </h3> <br />
+            <h3 className='trusted-title' > Add Trusted Contacts </h3> 
 
 
 
