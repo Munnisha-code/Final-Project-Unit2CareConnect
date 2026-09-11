@@ -1,0 +1,1046 @@
+
+/******************** Home Page Styling  ****************************/
+
+.home-container {
+
+    background-image: url("/image/careconnecthome.jpg");  
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.hero-section,
+.features-section,
+.works-section {
+
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.88);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: 1s;
+}
+
+
+.hero-section:hover,
+.features-section:hover,
+.works-section:hover {
+
+    transform: translateY(-5px);
+
+}
+
+.hero-section h2,
+.features-section h2,
+.works-section h2 {
+
+    text-align: center;
+
+    color: #2563eb;
+
+    margin-bottom: 20px;
+
+}
+
+.hero-section p,.works-section p {
+
+    color: #333;
+    font-size: 16px;
+    line-height: 1.7;
+    text-align: justify;
+
+}
+
+.features-section ol {
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0;
+
+}
+
+
+.features-section li {
+
+    list-style-position: inside;
+    background-color: #e8f8f5;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+
+}
+
+/* Tablet */
+
+@media(max-width:768px){
+
+.home-container {
+        padding: 25px 15px;
+
+    }
+.hero-section,.features-section,.works-section {
+
+        width: 95%;
+        padding: 20px;
+
+    }
+.features-section ol {
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* Mobile */
+
+@media(max-width:480px){
+
+    .hero-section h2,
+    .features-section h2,
+    .works-section h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .hero-section p,
+    .works-section p {
+
+        font-size: 14px;
+
+    }
+
+
+    .features-section li {
+
+        font-size: 14px;
+
+    }
+
+}
+
+           /*************** About Page ************************/
+
+.about-container {
+
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #e8f5e9;
+
+}
+
+.about-intro,
+.why-careconnect {
+
+    background-color: white;
+     padding: 30px;
+     border-radius: 20px;
+     max-width: 900px;
+     width: 90%;
+     margin: auto;
+     box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+     transition: 0.3s;
+
+}
+
+.about-intro:hover,
+.about-info-section:hover,
+.why-careconnect:hover,
+.vision-section:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
+.about-info-content h2,
+.about-intro h2,
+.why-careconnect h2 {
+
+    text-align: center;
+    color: #2563eb;
+
+}
+
+
+.about-intro p ,
+.why-careconnect p,
+.about-info-content p {
+
+    line-height: 1.6;
+    color: #333;
+
+}
+
+.about-info-section,
+.vision-section {
+
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    transition: transform 1s;
+
+}
+
+.about-section-image {
+
+    width: 350px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+}
+
+.about-info-content {
+
+    flex: 1;
+
+}
+
+.highlight-text {
+    color: #20c03d;
+    font-weight: 600;
+}
+
+
+.why-careconnect h3 {
+
+    color: #bd4495;
+    margin-top: 25px;
+    margin-bottom: 10px;
+
+}
+
+
+.about-gallery {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+
+.about-gallery h2 {
+    color: #2563eb;
+    margin-bottom: 20px;
+}
+.image-container {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x:auto;
+    padding: 20px;
+    scroll-behavior: smooth;
+    width:100%;
+}
+
+.image-container img {
+
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    flex: 0 0 auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 1s;
+
+}
+
+.image-container img:hover {
+
+    transform: scale(1.05);
+
+}
+
+/* Tablet */
+
+@media(max-width:768px){
+
+.mission-vision-container {
+    grid-template-columns: 1fr;
+
+ }
+.about-intro,
+.about-card {
+    width: 95%;
+    padding:20px;
+}
+.image-container img {
+
+        width: 230px;
+        height: 170px;
+    
+    }
+    
+
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .image-container {
+
+        gap: 15px;
+
+    }
+
+
+    .image-container img {
+        
+        width: 180px;
+        height: 140px;
+
+    }
+
+}
+
+
+/************************ Thankyou page ************************/
+
+.thankyou-container {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #f3f8ff;
+}
+
+.thankyou-container h3 {
+    color: #2563eb;
+    font-size: 30px;
+}
+
+.thankyou-container h4 {
+    color: #23af33;
+    font-weight: normal;
+}
+
+.thankyou-button {
+    padding: 12px 25px;
+    background-color: #7f9edf;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .thankyou-container {
+        padding: 15px;
+        gap: 15px;
+    }
+    .thankyou-container h3 {
+        font-size: 22px;
+    }
+    .thankyou-container h4 {
+        font-size: 16px;
+        text-align: center;
+
+    }
+    .thankyou-button {
+        width: 80%;
+        padding: 10px;
+    }
+}    
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .thankyou-container {
+        padding: 20px;
+        text-align: center;
+    }
+    .thankyou-container h3 {
+        font-size: 26px;
+    }
+     .thankyou-container h4 {
+        font-size: 18px;
+    }
+    .thankyou-button {
+        padding: 12px 20px;
+    }
+}
+
+
+/*-------------------------------- Register Form ---------------------------- */
+
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f6fc;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.register-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.register-form label {
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.register-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.register-button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #f3a22a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background-color: #1d4ed8;
+}
+
+
+/*  Mobile */
+
+@media (max-width: 600px) {
+
+    .register-container {
+        padding: 15px;
+    }
+
+    .register-form {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .register-title {
+        font-size: 22px;
+    }
+
+    .register-form input {
+        font-size: 14px;
+    }
+
+    .register-button {
+        font-size: 14px;
+    }
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .register-container {
+        padding: 20px;
+    }
+
+
+    .register-form {
+        width: 90%;
+        max-width: 450px;
+        padding: 25px;
+    }
+
+
+    .register-title {
+        font-size: 26px;
+    }
+
+
+    .register-form input {
+        font-size: 15px;
+    }
+
+
+    .register-button {
+        font-size: 15px;
+    }
+
+}
+
+
+/*    ---------------- Trusted Contact Form -----------------------                                */
+
+.trusted-contact-container {
+    width: 700px;
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #f2f4f5;
+    border-radius: 15px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+
+.trusted-title {
+    text-align: center;
+    color: #555151;
+    margin-bottom: 20px;
+}
+
+
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: 0.5s;
+}
+
+
+
+.contact-card:hover {
+
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border-left: 5px solid #4caf50;
+}
+
+
+.contact-card input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+
+}
+
+
+.contact-card input:hover {
+     border-color: #4caf50;
+
+}
+
+.contact-card input:focus {
+
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76,175,80,0.5);
+
+}
+
+.trusted-save-button,
+.tc-save-button {
+
+    width: 180px;
+    align-self: center;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+
+
+.trusted-save-button:hover,
+.tc-save-button:hover {
+   background-color: #d781e4;
+   transform: scale(1.05);
+
+}
+
+.contact-list {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.contact-card button {
+
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;  
+}
+
+.contact-card button:first-of-type {
+
+    background-color: #a4f07f;
+    color: white;
+    margin-top: 10px;
+
+}
+
+
+.contact-card button:last-of-type {
+
+    background-color: #f1918a;
+    color: white;
+    margin-top: 10px;
+
+}
+
+.contact-card button {
+
+    display: inline-block;
+
+}
+
+.contact-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+
+
+/* Tablet */
+
+@media(max-width:768px){
+
+.trusted-contact-container {
+        width: 90%;
+        padding: 20px;
+}
+.contact-card {
+    padding: 15px;
+
+    }
+}
+
+
+/* Mobile */
+
+@media(max-width:480px){
+
+.trusted-contact-container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+}
+
+.trusted-title {
+    font-size: 22px;
+
+    }
+
+
+.contact-card input {
+    font-size: 14px;
+    padding: 10px;
+
+    }
+
+.trusted-save-button,
+.tc-save-button {
+    width: 100%;
+
+    }
+
+}
+
+
+
+
+/* --------------------------   OneClickSendMessages-------------------------*/
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 700px;
+    margin: 40px auto;
+}
+
+.message-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+.message-textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+}
+
+
+
+.quick-message-button {
+    width: 250px;
+    min-height: 70px;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background-color: linear-gradient(135deg, #6dd5ed, #2193b0);
+    color:  #1f2937;
+
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+
+    transition: all 0.3s ease;
+}
+
+.quick-message-button:hover {
+    background-color: linear-gradient(135deg, #667eea, #764ba2);
+    transform:translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    transition: 1s;
+}
+
+.emergency-button {
+    width: 200px;
+    min-height: 70px;
+    padding: 15px;
+
+    border-radius: 16px;
+    border: none;
+
+    background-color: #ffdddd;
+    color: #b30000;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 1s;
+}
+
+
+.emergency-button:hover {
+    background-color: red;
+    color: white;
+
+    transform: translateY(-5px) scale(1.03);
+
+    box-shadow: 0 10px 20px rgba(255,0,0,0.3);
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .message-container {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .message-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .quick-message-button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .message-textarea {
+        width: 100%;
+        height: 90px;
+    }
+
+    .send-button {
+        width: 80%;
+        padding: 12px;
+    }
+
+}
+
+/* tablet*/
+
+@media (max-width: 768px) {
+
+    .message-container {
+        width: 90%;
+        margin: 30px auto;
+    }
+
+
+    .message-buttons {
+        gap: 15px;
+    }
+
+
+    .quick-message-button {
+        width: 220px;
+        min-height: 65px;
+    }
+
+
+    .message-textarea {
+        width: 100%;
+        height: 100px;
+    }
+
+
+    .send-button {
+        padding: 12px 30px;
+    }
+
+}
+
+
+/*-------------------------------- LiveLocation Styling --------------*/
+
+.live-location-container {
+
+    min-height: 100vh;
+    padding: 40px 20px;
+
+   
+    background-image: url("/image/gps.jpg");
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+}
+
+
+.live-location-container h2 {
+
+    color: #2563eb;
+    text-align: center;
+
+}
+
+
+.location-list {
+
+    width: 90%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:20px;
+
+}
+
+
+.location-card {
+
+    background-color: white;
+    padding: 30px;
+    width: 350px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    text-align: center;
+    transition: transform 0.3s;
+
+}
+
+
+.location-card:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
+.location-card h3 {
+
+    color: #2563eb;
+    margin-bottom: 20px;
+
+}
+
+
+.location-card p {
+
+    color: #333;
+    line-height: 1.6;
+
+}
+
+.success-message {
+
+    background-color: white;
+    color: green;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-weight: bold;
+
+}
+
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .live-location-container {
+
+        padding: 30px 15px;
+
+    }
+
+
+    .location-list {
+
+        width: 100%;
+
+    }
+
+
+    .location-card {
+
+        width: 90%;
+        padding: 25px;
+
+    }
+
+
+    .location-card h3 {
+
+        font-size: 20px;
+
+    }
+
+
+    .location-card p {
+
+        font-size: 15px;
+
+    }
+
+
+    .location-card button {
+
+        width: 100%;
+        padding: 12px;
+
+    }
+
+}
+
+/*  Mobile */
+
+@media (max-width: 480px) {
+
+    .live-location-container {
+
+        padding: 20px 10px;
+
+    }
+
+
+    .live-location-container h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .location-card {
+
+        width: 100%;
+        padding: 20px;
+        border-radius: 15px;
+
+    }
+
+
+    .location-card p {
+
+        font-size: 14px;
+
+    }
+
+
+    .location-card button {
+
+        font-size: 14px;
+
+    }
+
+
+    .success-message {
+
+        width: 90%;
+        text-align: center;
+        font-size: 14px;
+
+    }
+
+}
+
+
+
+
+
+

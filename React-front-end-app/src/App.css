@@ -1,0 +1,305 @@
+
+
+body {
+
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ADE6AC;
+}
+
+/*-------------------- SendButton ------------------------------*/
+
+.send-button {
+    width: 180px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f28a3f;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.send-button:hover {
+    background-color:#1d4ed8;
+    transform: scale(1.05);
+}
+
+
+
+/* ------------------------------ Header Styling ---------------------------- */
+
+header {
+   
+     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #4bce56;
+    box-shadow: 0 4px 10px rgba(0,0,0,0,0.1);
+}
+
+.brand-section{
+  
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+}
+
+.logo{
+ 
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+
+}
+
+header h1 {
+    color: rgb(70, 122, 236);
+    margin: 0;
+    font-size: 30px;
+}
+
+
+
+/* --------------------- Navbar styling ------------------------------------*/
+
+ .navbar {
+     
+    display: flex;
+    gap: 30px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #f38d19;
+    transform: translateY(-2px);
+ }
+
+ /*------------------------ Footer  Styling -----------------------------*/
+
+ footer {
+    background-color: #4bce56;
+    color: rgb(70, 122, 236);
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+
+
+footer p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+footer a {
+    color: #e95050;
+    font-size: 18px;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+  /*---------------------------- Mobile & Tab responsive ----------------------*/
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 15px 25px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .navbar {
+        gap: 20px;
+    }
+
+    .navbar a {
+        font-size: 16px;
+    }
+    
+    footer {
+        padding: 18px;
+    }
+
+    footer h4 {
+        font-size: 16px;
+    }
+
+    footer p {
+        font-size: 13px;
+    }
+}
+
+/* mobile*/
+
+@media (max-width: 480px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .navbar a {
+        font-size: 16px;
+    }
+    
+    footer {
+        padding: 15px;
+    }
+
+    footer h4 {
+        font-size: 15px;
+    }
+
+    footer p {
+        font-size: 12px;
+    }
+
+    footer a {
+        display: block;
+        margin: 8px 0;
+    }
+}
+
+
+
+  /*---------------------------- Login Page --------------------------------*/ 
+
+.login-container {
+
+    background-color: rgb(216, 239, 213);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 180px);
+    padding: 30px 20px;
+   
+
+}
+
+.login-form {
+    background-color: #edf6f0;
+    width: 350px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin: 30px 0;
+}
+
+.login-form h3 {
+    text-align: center;
+    color: #2e86de;
+}
+
+ .login-button {
+    background-color: #d89446;
+    color: white;
+    padding:10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+   
+}
+
+.login-button:hover {
+    background-color: #e298f1;
+    transition: 1s;
+}     
+
+.login-error-message {
+    color: red;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .login-container {
+        min-height: 75vh;
+        padding: 20px;
+    }
+
+    .login-form {
+        width: 70%;
+        max-width: 350px;
+        padding: 25px;
+    }
+
+    .login-form h3 {
+        font-size: 22px;
+    }
+
+    .login-button {
+        font-size: 15px;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .login-container {
+        min-height: 80vh;
+        padding: 15px;
+    }
+
+    .login-form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .login-form h3 {
+        font-size: 20px;
+    }
+
+    .login-form input {
+        font-size: 14px;
+    }
+
+    .login-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+}
