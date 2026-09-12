@@ -7,15 +7,7 @@ function RegisterForm(){
 
     const navigate = useNavigate();
 
-    const [ data, setData] = useState({
-        firstName: '',
-        lastName: '',
-        mobileNumber:'',
-        email:'',
-        password:'',
-        confirmPassword:'',
-
-    });
+    const [ data, setData] = useState({firstName: '',lastName: '',mobileNumber:'', email:'', password:'', confirmPassword:'' });
 
     const {firstName, lastName, mobileNumber, email, password, confirmPassword} = data;
 
@@ -25,6 +17,20 @@ function RegisterForm(){
     
     const submitHandler = ev => {
          ev.preventDefault();
+    if (!firstName.trim() || !lastName.trim() 
+                          || !mobileNumber.trim() 
+                          || !email.trim() 
+                          || !password.trim() 
+                          || !confirmPassword.trim()) {
+
+    alert("Please fill in all Provided registration details.");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert("Password and Confirm Password must match.");
+    return;
+  }
          
           navigate('/trusted-contacts');
     }
