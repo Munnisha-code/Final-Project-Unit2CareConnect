@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import {  Link, useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:8080/api/users/login";
+const API_URL = "http://localhost:8080/api/auth/login";
 
 function Login(){
 
@@ -26,26 +26,39 @@ function Login(){
    
    // login submit handler
 
-   const submitHandler = ev => {
+   const submitHandler = async (ev) => {
          ev.preventDefault();
 
     
-    const user = userLogin.find((item) =>
-                       item.email === data.username && 
-                       item.password === data.password        
-        );
+     if (!username.trim() || !password.trim()) { setError("Please enter your email and password.");
+             return;
+      }
 
-      if (user) {
-          
-          setError('');
+     try {const response = await fetch(API_URL, {method: "POST",
+                                                 headers: {"Content-Type": "application/json"},
+                                                 body: JSON.stringify({email: username,password: password})});
 
-        navigate('/one-click-send-message');
+      if (!response.ok) {const backendError = await response.text();
+
+      console.error("Login failed:", {status: response.status,statusText: response.statusText, backendError});
+
+      setError("Invalid email or password.");
+          return;
+      }
+
+      const loginResponse = await response.json();
+
+        console.log("Login successful:", loginResponse);
+
+      setError("");
+
+       navigate("/one-click-send-message");
       } 
 
-      else {
-        setError('invalid username or password');
-      }  
-
+     catch (error) {console.error("Login error:", error);
+      
+      setError("Unable to connect to the server. Please try again.");
+      }
     }
 
     
