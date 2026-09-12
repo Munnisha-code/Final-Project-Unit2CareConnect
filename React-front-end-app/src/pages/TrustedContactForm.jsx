@@ -16,7 +16,44 @@ const [contacts, setContacts] = useState([{ id: 1, databaseId:null, name: "", mo
                                           { id: 3, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
                                           { id: 4, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
                                           { id: 5, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, }]);
-    // Update individual contact details
+   
+   const getContacts = async () => {
+    
+    try {const response = await fetch(API_URL);
+
+    if (!response.ok) {const backendError = await response.text();
+
+      console.error("GET failed:", {status: response.status,statusText: response.statusText,backendError});
+
+      throw new Error(`Could not load trusted contacts. Status: ${response.status}`);}
+
+    const savedContacts = await response.json();
+
+    console.log("Contacts loaded from backend:", savedContacts);
+
+    setContacts((currentContacts) => currentContacts.map((card, index) => {
+        const savedContact = savedContacts[index];
+
+        if (!savedContact) {
+          return {...card, databaseId: null,
+                           name: "",
+                           mobileNumber: "",
+                           relationship: "",
+                           saved: false }}
+
+        return {...card, databaseId: savedContact.id,
+                         name: savedContact.name,
+                         mobileNumber: savedContact.mobileNumber,
+                         relationship: savedContact.relationship,
+                         saved: true}}));
+                        } 
+   catch (error) {
+    console.error("Error loading trusted contacts:", error);
+    alert(error.message);
+  }
+}
+
+// Update individual contact details
 
     const changeHandler = (id, ev) => { 
         
