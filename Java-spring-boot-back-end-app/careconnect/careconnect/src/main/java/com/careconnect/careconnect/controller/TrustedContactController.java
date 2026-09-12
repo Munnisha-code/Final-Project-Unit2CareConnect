@@ -35,7 +35,7 @@ public class TrustedContactController {
     public TrustedContact updateContact(
             @PathVariable Long id,
             @RequestBody TrustedContact contact){
-      contact.setid(id);
+      contact.setId(id);
       return repository.save(contact);
     }
 
