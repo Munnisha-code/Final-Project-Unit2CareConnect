@@ -17,8 +17,9 @@ function RegisterForm(){
          setData({...data, [ev.target.name]: ev.target.value});
     }
     
-    const submitHandler = ev => {
+    const submitHandler = async (ev) => {
          ev.preventDefault();
+
     if (!firstName.trim() || !lastName.trim() 
                           || !mobileNumber.trim() 
                           || !email.trim() 
@@ -33,8 +34,36 @@ function RegisterForm(){
     alert("Password and Confirm Password must match.");
     return;
   }
+
+  try {const response = await fetch(API_URL, { method: "POST",
+                                               headers: {"Content-Type": "application/json"}, 
+                                               body: JSON.stringify({firstName, 
+                                                                     lastName,
+                                                                     mobileNumber, 
+                                                                     email, password })});
+
+    if (!response.ok) { const backendError = await response.text();
+
+      console.error("Registration failed:", {
+        status: response.status,
+        statusText: response.statusText,
+        backendError});
+
+      throw new Error(`Registration failed. Status: ${response.status}`);
+    }
+
+    const registeredUser = await response.json();
+
+    console.log("User registered successfully:", registeredUser);
+
+    alert("Registration successful!");
+  } 
+   catch (error) {
+    console.error("Registration error:", error);
+    alert(error.message);
+  }
          
-          navigate('/trusted-contacts');
+          
     }
 
 
