@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import {  Link, useNavigate } from "react-router-dom";
-import userLogin from '../mockData/userLogin.json';
 
+const API_URL = "http://localhost:8080/api/users/login";
 
 function Login(){
 
