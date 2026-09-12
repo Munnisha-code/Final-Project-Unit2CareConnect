@@ -56,7 +56,7 @@ function RegisterForm(){
 
     console.log("User registered successfully:", registeredUser);
 
-    alert("Registration successful!");
+    navigate("/trusted-contacts");
   } 
    catch (error) {
     console.error("Registration error:", error);
