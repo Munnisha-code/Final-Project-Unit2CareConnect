@@ -1,7 +1,7 @@
 
 import './Pages.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -11,13 +11,11 @@ const API_URL = "http://localhost:8080/api/trusted-contacts";
 function TrustedContactForm(){
 const navigate = useNavigate();
 
-    const [contacts, setContacts] = useState([
-        { id: 1, name: "", mobileNumber: "", relationship: "", saved: false, isNew: true },
-        { id: 2, name: "", mobileNumber: "", relationship: "", saved: false, isNew: true },
-        { id: 3, name: "", mobileNumber: "", relationship: "", saved: false, isNew: true },
-        { id: 4, name: "", mobileNumber: "", relationship: "", saved: false, isNew: true },
-        { id: 5, name: "", mobileNumber: "", relationship: "", saved: false, isNew: true }]);
-
+const [contacts, setContacts] = useState([{ id: 1, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
+                                          { id: 2, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
+                                          { id: 3, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
+                                          { id: 4, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
+                                          { id: 5, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, }]);
     // Update individual contact details
 
     const changeHandler = (id, ev) => { 
@@ -31,35 +29,54 @@ const navigate = useNavigate();
   const saveContact = async (id) => {
   const contact = contacts.find((item) => item.id === id);
 
-  if (
-    !contact.name.trim() || !contact.mobileNumber.trim() || !contact.relationship.trim()) {
-    alert("Please fill Name, Mobile Number, and Relationship");
-    return;
-  }
 
-  try { const isExistingContact = contact.saved === true;
-
-  const response = await fetch(
-    isExistingContact ? `${API_URL}/${contact.id}` : API_URL,
-    {
-      method: isExistingContact ? "PUT" : "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: contact.name,
-        mobileNumber: contact.mobileNumber,
-        relationship: contact.relationship
-      })
+  if ( !contact.name.trim() || !contact.mobileNumber.trim() || !contact.relationship.trim()) {
+       alert("Please fill Name, Mobile Number, and Relationship");
+       return;
     }
-  );
+
+      try { const isExistingContact = contact.databaseId !== null && contact.databaseId !== undefined;
+
+        console.log("Contact before saving:", contact);
+        console.log("Request:", isExistingContact ? "PUT" : "POST", isExistingContact ? `${API_URL}/${contact.databaseId}`
+                  : API_URL);
+
+           const response = await fetch(isExistingContact ? `${API_URL}/${contact.databaseId}` : API_URL,{
+                   
+               method: isExistingContact ? "PUT" : "POST",
+                   
+              headers: { "Content-Type": "application/json"},
+
+                        body: JSON.stringify({name: contact.name,
+                                              mobileNumber: contact.mobileNumber,
+                                              relationship: contact.relationship })});
     if (!response.ok) {
-      throw new Error("Could not save trusted contact");
-    }
+  const backendError = await response.text();
+
+  console.error("Save failed:", {
+    status: response.status,
+    statusText: response.statusText,
+    backendError
+  });
+
+  throw new Error(`Could not save trusted contact. Status: ${response.status}`);}
 
     const savedContact = await response.json();
+    console.log("Saved contact from backend:", savedContact);
 
-    const updatedContacts = contacts.map((item) => item.id === id ? {...savedContact, saved: true}: item);
+if (savedContact.id === null || savedContact.id === undefined) {
+  console.error("Backend response has no 'id':", savedContact);
+
+  throw new Error(
+    "Contact saved, but backend did not return the database ID."
+  );
+}
+
+    const updatedContacts = contacts.map((item) => item.id === id ? { ...item, databaseId: savedContact.id,
+                                                                                name: savedContact.name,
+                                                                                mobileNumber: savedContact.mobileNumber,
+                                                                                relationship: savedContact.relationship,
+                                                                                saved: true}: item);
 
     setContacts(updatedContacts);
   } 
@@ -80,11 +97,27 @@ const navigate = useNavigate();
 
 
 //
-     const deleteContact = (id) => { const updatedContacts = contacts.map((contact) => contact.id === id ?
+     const deleteContact = async (id) => {
+        const contact = contacts.find((item)=>item.id === id);
+        
+        try{const response = await fetch(`${API_URL}/${contact.databaseId}`, {method: "DELETE"});
+        console.log("Delete status:", response.status);
 
-            {...contact, name:'', mobileNumber:'', relationship:'', saved:false } : contact );
+          if (!response.ok) {throw new Error("Could not delete trusted contact");}
 
-           setContacts(updatedContacts); 
+            const updatedContacts = contacts.map((item) => item.id === id ? {...item, 
+                                                                              databaseId: null, 
+                                                                              name:'', 
+                                                                              mobileNumber:'', 
+                                                                              relationship:'', 
+                                                                              saved:false, } : item );
+            setContacts(updatedContacts); 
+           }
+
+        catch (error) { console.error("Error deleting contact:", error);
+                       
+                      alert("Contact was not deleted. Please try again.");
+            }
         }
  
        
