@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import './Pages.css';
 import SendButton from '../components/SendButton';
 
-
+const MESSAGE_API_URL = "http://localhost:8080/api/messages";
 
 function OneClickSendMessage(){
     const [ message, setMessage] = useState('');
