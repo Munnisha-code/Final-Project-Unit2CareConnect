@@ -22,16 +22,32 @@ function OneClickSendMessage(){
 
     ];
       
-    const sendMessageHandler = () => { 
+    const sendMessageHandler = async () => { 
         if (message.trim() === ''){
             setErrorMessage('Please select or type a message 😊.');
+            return;
         }
-        else {
-            setErrorMessage('');
-            setMessageSent(true);
+        try{const response = await fetch(MESSAGE_API_URL,{
+                                          method:"POST", headers: {"Content-Type":"application/json"},
+                                          body: JSON.stringify({trustedContactId:1,messageText:message.trim()})});
+       
+        if (!response.ok) { setErrorMessage('Message could not be sent. Please try again.');
+            return;
         }
 
-    };
+        const savedMessage = await response.json();
+
+        console.log('Message saved successfully:', savedMessage);
+
+        setErrorMessage('');
+        setMessageSent(true);
+    } 
+       catch (error) {
+        console.error('Message send error:', error);
+        setErrorMessage('Unable to connect to the server. Please try again.');
+    }
+
+    }
 
     const sendAnotherMessageHandler = () =>{ 
         setMessageSent(false);
