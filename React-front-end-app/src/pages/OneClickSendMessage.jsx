@@ -12,6 +12,7 @@ function OneClickSendMessage(){
     const [ message, setMessage] = useState('');
     const [messageSent, setMessageSent] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [trustedContacts, setTrustedContacts] = useState([]);
 
     const messages = [
 
@@ -24,6 +25,27 @@ function OneClickSendMessage(){
         " 🌳 I am at the park."
 
     ];
+
+    useEffect(() => {const loadTrustedContacts = async () => {
+        
+        try {
+            
+            const response = await fetch(TRUSTED_CONTACTS_API_URL);
+
+            if (!response.ok) {throw new Error('Unable to load trusted contacts.');
+                
+            }
+
+            const contacts = await response.json();
+
+            setTrustedContacts(contacts);
+
+        console.log('Trusted contacts loaded:', contacts);
+        } 
+        catch (error) {console.error('Trusted contacts error:', error);}
+    }
+
+    loadTrustedContacts();}, []);
       
     const sendMessageHandler = async () => { 
         if (message.trim() === ''){
