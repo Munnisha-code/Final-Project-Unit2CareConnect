@@ -5,6 +5,9 @@ import SendButton from '../components/SendButton';
 
 const MESSAGE_API_URL = "http://localhost:8080/api/messages";
 
+const TRUSTED_CONTACTS_API_URL = "http://localhost:8080/api/trusted-contacts";
+
+
 function OneClickSendMessage(){
     const [ message, setMessage] = useState('');
     const [messageSent, setMessageSent] = useState(false);
