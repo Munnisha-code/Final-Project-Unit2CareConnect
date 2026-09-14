@@ -12,8 +12,12 @@ function OneClickSendMessage(){
     const [ message, setMessage] = useState('');
     const [messageSent, setMessageSent] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    
     const [trustedContacts, setTrustedContacts] = useState([]);
     const [selectedContact, setSelectedContact] = useState(null);
+
+    const [notificationMessage, setNotificationMessage] = useState('');
+    const [contactAcknowledged, setContactAcknowledged] = useState(false);
 
     const messages = [
 
@@ -71,21 +75,32 @@ function OneClickSendMessage(){
 
         console.log('Message saved successfully:', savedMessage);
 
-        setErrorMessage('');
-        setMessageSent(true);
+            setErrorMessage('');
+
+            setNotificationMessage(`Safety update sent to ${selectedContact.name}.`);
+
+            setContactAcknowledged(false);
+
+            setMessageSent(true);
+
+        setTimeout(() => { setContactAcknowledged(true);
+
+        setNotificationMessage(`${selectedContact.name} acknowledged your safety update.`);}, 2000);
     } 
        catch (error) {
         console.error('Message send error:', error);
         setErrorMessage('Unable to connect to the server. Please try again.');
-    }
+        }
 
     }
 
     const sendAnotherMessageHandler = () =>{ 
-        setMessageSent(false);
-        setMessage('');
-        setErrorMessage('');
-    };
+                                             setMessageSent(false);
+                                             setMessage('');
+                                             setErrorMessage('');
+                                             setNotificationMessage('');
+                                             setContactAcknowledged(false);
+                                           }
 
     return( 
 
@@ -98,10 +113,20 @@ function OneClickSendMessage(){
                     <div className = 'success-section'> 
 
                          <h4> 🤩 Message sent Successfully!  </h4>
+                         <p>Message sent to:</p>
+
+                         <p className="selected-contact-name"> {selectedContact?.name} </p>
                          <p> Your message:</p>
                          <p> {message} </p>
-                         <p> Your trusted contacts have been notified.</p>
+                    <div className="notification-status">
+                          <p>{notificationMessage}</p>
 
+                           {!contactAcknowledged ? (
+                          <p className="waiting-notification"> Waiting for simulated acknowledgement...</p>
+                   ) : (
+                          <p className="acknowledged-notification"> ✓ Simulated acknowledgement received </p>
+                        )}
+                    </div> 
                          <button 
                                 className='send-button'
                                 type='button'
@@ -128,8 +153,10 @@ function OneClickSendMessage(){
 
                                         className={ selectedContact?.id === contact.id ? "contact-card selected" : "contact-card"}
 
-                                        onClick={() => { setSelectedContact(contact); setErrorMessage('');
-
+                                        onClick={() => { setSelectedContact(contact); 
+                                                         setErrorMessage('');
+                                                         setNotificationMessage('');
+                                                         setContactAcknowledged(false);
                                         }}
                                     >
                                         <strong>{contact.name}</strong>
