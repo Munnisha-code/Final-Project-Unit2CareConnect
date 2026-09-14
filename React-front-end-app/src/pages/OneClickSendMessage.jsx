@@ -13,6 +13,7 @@ function OneClickSendMessage(){
     const [messageSent, setMessageSent] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [trustedContacts, setTrustedContacts] = useState([]);
+    const [selectedContact, setSelectedContact] = useState(null);
 
     const messages = [
 
@@ -33,7 +34,7 @@ function OneClickSendMessage(){
             const response = await fetch(TRUSTED_CONTACTS_API_URL);
 
             if (!response.ok) {throw new Error('Unable to load trusted contacts.');
-                
+
             }
 
             const contacts = await response.json();
@@ -48,13 +49,19 @@ function OneClickSendMessage(){
     loadTrustedContacts();}, []);
       
     const sendMessageHandler = async () => { 
+        
         if (message.trim() === ''){
             setErrorMessage('Please select or type a message 😊.');
             return;
         }
+
+        if (!selectedContact){
+            setErrorMessage('Please select a trusted contact first.');
+            return;
+        }
         try{const response = await fetch(MESSAGE_API_URL,{
                                           method:"POST", headers: {"Content-Type":"application/json"},
-                                          body: JSON.stringify({trustedContactId:1,messageText:message.trim()})});
+                                          body: JSON.stringify({trustedContactId:selectedContact.id,messageText:message.trim()})});
        
         if (!response.ok) { setErrorMessage('Message could not be sent. Please try again.');
             return;
@@ -106,6 +113,39 @@ function OneClickSendMessage(){
            ) : (
 
                     <div className='message-form-section'>
+
+                    <div className="trusted-contacts-section">
+
+                         <h4>Select a Trusted Contact</h4>
+
+                        {trustedContacts.length === 0 ? (<p>No trusted contacts found.</p>
+                        
+                    ) : (
+                            <div className="trusted-contacts-list">
+
+                                {trustedContacts.map((contact) => (
+                                    <button key={contact.id} type="button"
+
+                                        className={ selectedContact?.id === contact.id ? "contact-card selected" : "contact-card"}
+
+                                        onClick={() => { setSelectedContact(contact); setErrorMessage('');
+
+                                        }}
+                                    >
+                                        <strong>{contact.name}</strong>
+                                        <span>{contact.relationship}</span>
+                                        <small>{contact.mobileNumber}</small>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+
+                        {selectedContact && (
+                            <p className="selected-contact-message">
+                                Selected contact: {selectedContact.name}
+                            </p>
+                        )}
+                    </div>
 
                            <h4>Send a Quick Message</h4>
       
