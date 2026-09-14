@@ -852,6 +852,31 @@
     text-align: center;
 }
 
+.selected-contact-name {
+    margin: 8px 0 16px;
+    color: #166534;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.notification-status {
+    margin-top: 20px;
+    padding: 14px;
+    background-color: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 10px;
+}
+
+.waiting-notification {
+    color: #92400e;
+    font-weight: 600;
+}
+
+.acknowledged-notification {
+    color: #166534;
+    font-weight: 700;
+}
+
 /* Mobile */
 
 @media (max-width: 480px) {
