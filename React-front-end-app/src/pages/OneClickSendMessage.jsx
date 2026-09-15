@@ -5,8 +5,6 @@ import SendButton from '../components/SendButton';
 
 const MESSAGE_API_URL = "http://localhost:8080/api/messages";
 
-const TRUSTED_CONTACTS_API_URL = "http://localhost:8080/api/trusted-contacts";
-
 
 function OneClickSendMessage(){
     const [ message, setMessage] = useState('');
@@ -31,26 +29,37 @@ function OneClickSendMessage(){
 
     ];
 
-    useEffect(() => {const loadTrustedContacts = async () => {
-        
+    useEffect(() => {
+    const loadTrustedContacts = async () => {
+        const userId = localStorage.getItem("userId");
+
+        if (!userId) {
+            setErrorMessage("Please log in to view trusted contacts.");
+            setTrustedContacts([]);
+            return;
+        }
+
         try {
-            
-            const response = await fetch(TRUSTED_CONTACTS_API_URL);
+            const response = await fetch(`http://localhost:8080/api/trusted-contacts/user/${userId}`);
 
-            if (!response.ok) {throw new Error('Unable to load trusted contacts.');
-
+            if (!response.ok) {
+                throw new Error("Unable to load trusted contacts.");
             }
 
             const contacts = await response.json();
 
             setTrustedContacts(contacts);
 
-        console.log('Trusted contacts loaded:', contacts);
+            console.log("Trusted contacts loaded:", contacts);
         } 
-        catch (error) {console.error('Trusted contacts error:', error);}
-    }
+        catch (error) {
+            console.error("Trusted contacts error:", error);
+            setErrorMessage("Unable to load trusted contacts.");
+        }
+    };
 
-    loadTrustedContacts();}, []);
+    loadTrustedContacts();
+}, []);
       
     const sendMessageHandler = async () => { 
         

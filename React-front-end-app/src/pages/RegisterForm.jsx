@@ -56,6 +56,10 @@ function RegisterForm(){
 
     console.log("User registered successfully:", registeredUser);
 
+    localStorage.setItem("userId", registeredUser.id);
+
+    console.log("Saved userId:", localStorage.getItem("userId"));
+
     navigate("/trusted-contacts");
   } 
    catch (error) {

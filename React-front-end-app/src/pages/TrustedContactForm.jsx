@@ -5,11 +5,17 @@ import React, { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-const API_URL = "http://localhost:8080/api/trusted-contacts";
+const userId = localStorage.getItem("userId");
+
+const API_URL = `http://localhost:8080/api/trusted-contacts/user/${userId}`;
 
 
 function TrustedContactForm(){
 const navigate = useNavigate();
+
+const userId = localStorage.getItem("userId");
+
+const API_URL = `http://localhost:8080/api/trusted-contacts/user/${userId}`;
 
 const [contacts, setContacts] = useState([{ id: 1, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
                                           { id: 2, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
@@ -52,6 +58,14 @@ const [contacts, setContacts] = useState([{ id: 1, databaseId:null, name: "", mo
     alert(error.message);
   }
 }
+
+      useEffect(() => { if (userId) { getContacts();
+    } 
+      
+    else {
+        alert("User ID not found. Please log in again.");
+    }
+}, []);
 
 // Update individual contact details
 
@@ -226,7 +240,8 @@ if (savedContact.id === null || savedContact.id === undefined) {
                                 </div>
                     ))}
 
-            </div> < br />
+            </div> 
+
 
               <button className ='tc-save-button' type='button' onClick={ () => navigate('/thank-you')} > 
                       
