@@ -30,7 +30,8 @@ function Login(){
          ev.preventDefault();
 
     
-     if (!username.trim() || !password.trim()) { setError("Please enter your email and password.");
+     if (!username.trim() || !password.trim()) { 
+             setError("Please enter your email and password.");
              return;
       }
 
@@ -49,6 +50,10 @@ function Login(){
       const loginResponse = await response.json();
 
         console.log("Login successful:", loginResponse);
+
+        localStorage.setItem("userId", loginResponse.userId);
+
+        console.log("Current userId:", localStorage.getItem("userId"));
 
       setError("");
 
