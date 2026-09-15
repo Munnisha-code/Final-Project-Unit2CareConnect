@@ -1,0 +1,29 @@
+
+
+[
+    {    
+        
+        "address": "St. Charles, Missouri",
+        "latitude": "38.7881",
+        "longitude": "-90.4974"
+    },
+
+     {
+        "address": "Austin, Texas",
+        "latitude": "30.2672",
+        "longitude": "-97.7431"
+    },
+
+    {
+        "address": "Seattle, Washington",
+        "latitude": "47.6062",
+        "longitude": "-122.3321"
+    },
+
+    {
+        "address": "Miami, Florida",
+        "latitude": "25.7617",
+        "longitude": "-80.1918"
+    }
+    
+]

@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
+
 @RestController
 @RequestMapping("/api/messages")
-
+@CrossOrigin
 public class MessageController {
 
     private final MessageRepository messageRepository;
@@ -31,5 +32,15 @@ public class MessageController {
         Message saveMessage = messageRepository.save(message);
 
         return ResponseEntity.ok(saveMessage);
+    }
+
+    @GetMapping
+     public ResponseEntity<?> getAllMessages(){
+        return ResponseEntity.ok(messageRepository.findAll());
+    }
+    @GetMapping("/trustedContact/{trustedContactId}")
+     public ResponseEntity<?> getMessageByTrustedContact(@PathVariable Long trustedContactId){
+        return ResponseEntity.ok(messageRepository
+                .findByTrustedContactIdOrderByCreatedAtAsc(trustedContactId));
     }
 }
