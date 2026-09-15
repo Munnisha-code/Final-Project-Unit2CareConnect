@@ -39,8 +39,7 @@ function OneClickSendMessage(){
             return;
         }
 
-        try {
-            const response = await fetch(`http://localhost:8080/api/trusted-contacts/user/${userId}`);
+        try { const response = await fetch(`http://localhost:8080/api/trusted-contacts/user/${userId}`);
 
             if (!response.ok) {
                 throw new Error("Unable to load trusted contacts.");
@@ -56,7 +55,7 @@ function OneClickSendMessage(){
             console.error("Trusted contacts error:", error);
             setErrorMessage("Unable to load trusted contacts.");
         }
-    };
+    }
 
     loadTrustedContacts();
 }, []);
