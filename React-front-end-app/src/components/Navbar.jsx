@@ -1,12 +1,16 @@
 
-import {  Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {  Link, useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 
 function Navbar({links}){
 
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("userId"));
+
+    useEffect(() =>{setIsLoggedIn(!!localStorage.getItem("userId"));}, [location]);
 
 
     const handleLogout = () => { localStorage.removeItem("userId");
