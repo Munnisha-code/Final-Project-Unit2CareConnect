@@ -1,12 +1,24 @@
 
-import { useState } from 'react';
-import  LocationData from '../mockData/locationData.json';
+import { useState, useEffect } from 'react';
+
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+
 import './Pages.css';
 import SendButton from '../components/SendButton';
 
 function LiveLocation(){
      
     const [message, setMessage] = useState('');
+    const [position, setPosition] = useState(null);
+    const [error, setError] = useState('');
+
+    useEffect(() => { navigator.geolocation.getCurrentPosition(
+        (location) => { setPosition([ location.coords.latitude,
+                                      location.coords.longitude ]);
+
+        },
+        () => {setError('Unable to get your location.');}); }, []);
 
     function handleSendLocation() {
         setMessage('Location Sent Successfully!😊')
@@ -19,26 +31,23 @@ function LiveLocation(){
            
            <h2> Location </h2>
 
-         <section className ='location-list'>
+           {error && <p > {error} </p>}
+
+           {position && (
+
+         <MapContainer className="location-map" center={position} zoom={13}
+>
+            <TileLayer attribution='&copy; OpenStreetMap contributors'url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+            <Marker position={position}>
            
-           {
-               LocationData.map((location, index) => (
+              <Popup> Your current Location </Popup>
 
-               <article className ='location-card'
-                        key ={index} >
+            </Marker>
+         </MapContainer>
+         )}
 
-                    <h3> Location {index+1} </h3>
-                    <p> Address : {location.address} </p>
-                    <p> Latitude : {location.latitude} </p>
-                    <p> Longitude: {location.longitude} </p>
-
-                    <SendButton onClick = {handleSendLocation}> Send Location </SendButton> 
-
-                </article>
-              ))
-           }
-            
-           </section>   
+        <SendButton onClick = {handleSendLocation}> Send Location </SendButton>  
 
            { message && (<p className = 'success-message'> {message} </p>) }
 
