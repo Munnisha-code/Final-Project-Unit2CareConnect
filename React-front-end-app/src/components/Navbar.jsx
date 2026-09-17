@@ -23,9 +23,15 @@ function Navbar({links}){
     return(
 
         <nav className= "navbar">
-            {links
-                .filter((link) => link.name !== "Login" && link.name !== "Logout")
-                .map((link) => ( <Link key={link.name} to={link.path}> {link.name} </Link> ))
+
+            {links.filter((link) => {
+                 
+                    if (link.name === "Live Location"){
+                        return isLoggedIn;
+                    }
+                        return link.name !== "Login" && link.name !== "Logout";
+                    })
+                  .map((link) => ( <Link key={link.name} to={link.path}> {link.name} </Link> ))
             }
 
             {isLoggedIn  ? (
