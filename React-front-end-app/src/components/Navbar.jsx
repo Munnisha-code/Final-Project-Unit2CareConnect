@@ -9,6 +9,7 @@ function Navbar({links}){
     const location = useLocation();
 
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("userId"));
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() =>{setIsLoggedIn(!!localStorage.getItem("userId"));}, [location]);
 
@@ -23,6 +24,10 @@ function Navbar({links}){
     return(
 
         <nav className= "navbar">
+
+            <button type="button" className="hamburger-button" onClick={() => setMenuOpen(!menuOpen)}> ☰ </button>
+
+        <div className={`nav-menu ${menuOpen ? "open" : ""}`}>
 
             {links.filter((link) => {
                  
@@ -40,8 +45,11 @@ function Navbar({links}){
             ) : (
                 <Link to="/login">  Login </Link>
             )}
-            
+
+          </div>  
+
         </nav>
+
     );
 }
 
