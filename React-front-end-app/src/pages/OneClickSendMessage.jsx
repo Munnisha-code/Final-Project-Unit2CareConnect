@@ -168,8 +168,6 @@ function OneClickSendMessage(){
                                         }}
                                     >
                                         <strong>{contact.name}</strong>
-                                        <span>{contact.relationship}</span>
-                                        <small>{contact.mobileNumber}</small>
                                     </button>
                                 ))}
                             </div>
