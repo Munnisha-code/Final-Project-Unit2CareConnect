@@ -28,7 +28,6 @@ function ProtectedRoute({ children }) {
 
 function App() {
  
-
   return (
       <>
        < BrowserRouter basename="/Final-Project-Unit1-CareConnect">
@@ -44,7 +43,7 @@ function App() {
                 <Route path ="/trusted-contacts" element = {<TrustedContactForm/>} />
                 <Route path = "/one-click-send-message" element = {<OneClickSendMessage/>} />
                 <Route path = "/thank-you" element = {<ThankYou/>} />
-                <Route path = "/live-location" element ={<protectedRoute> <LiveLocation/> </protectedRoute>} />
+                <Route path = "/live-location" element ={<ProtectedRoute> <LiveLocation/> </ProtectedRoute>} />
 
             </Routes>
             
