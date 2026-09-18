@@ -48,11 +48,9 @@ function OneClickSendMessage(){
             const contacts = await response.json();
 
             setTrustedContacts(contacts);
-
-            console.log("Trusted contacts loaded:", contacts);
         } 
-        catch (error) {
-            console.error("Trusted contacts error:", error);
+          catch (error) {
+            
             setErrorMessage("Unable to load trusted contacts.");
         }
     }
@@ -79,9 +77,7 @@ function OneClickSendMessage(){
             return;
         }
 
-        const savedMessage = await response.json();
-
-        console.log('Message saved successfully:', savedMessage);
+            await response.json();
 
             setErrorMessage('');
 
@@ -96,8 +92,9 @@ function OneClickSendMessage(){
         setNotificationMessage(`${selectedContact.name} acknowledged your safety update.`);}, 2000);
     } 
        catch (error) {
-        console.error('Message send error:', error);
+
         setErrorMessage('Unable to connect to the server. Please try again.');
+
         }
 
     }

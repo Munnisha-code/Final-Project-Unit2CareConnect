@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -20,9 +21,28 @@ function LiveLocation(){
 
     const CONTACTS_API_URL = `http://localhost:8080/api/trusted-contacts/user/${userId}`;
 
-    useEffect(() => { const watchId = navigator.geolocation.watchPosition(
+    useEffect(() => {
+        if (!navigator.geolocation) {
+            setError('Location is not supported by this browser.');
+            return undefined;
+        }
+
+        const handleLocationError = ({ code }) => {
+            if (code === 1) {
+                setError('Location permission was denied. Please allow location access in your browser settings.');
+            } else if (code === 2) {
+                setError('Your location is currently unavailable. Please turn on device location and try again.');
+            } else if (code === 3) {
+                setError('Location request timed out. Please try again.');
+            } else {
+                setError('Unable to get your location.');
+            }
+        };
+
+        const watchId = navigator.geolocation.watchPosition(
         (location) => {const latitude = location.coords.latitude;
                        const longitude = location.coords.longitude;
+                       setError('');
                        setPosition([ location.coords.latitude, location.coords.longitude ]);
 
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
@@ -35,7 +55,8 @@ function LiveLocation(){
                 });
         },
 
-        () => { setError('Unable to get your location.'); });
+        handleLocationError,
+        { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 });
 
     return () => { navigator.geolocation.clearWatch(watchId); }
 }, []);
@@ -142,6 +163,8 @@ function LiveLocation(){
          )}
 
         <SendButton onClick = {handleSendLocation}> Send Location </SendButton>  
+
+        <Link to="/one-click-send-message" className="location-message-link"> Messages </Link>
 
            { message && (<p className = 'success-message'> {message} </p>) }
 
