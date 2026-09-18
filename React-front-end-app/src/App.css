@@ -34,7 +34,7 @@ header {
      display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    padding: 12px 28px;
     background-color: #4bce56;
     box-shadow: 0 4px 10px rgba(0,0,0,0,0.1);
 }
@@ -43,7 +43,7 @@ header {
   
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 
 }
 
@@ -60,7 +60,7 @@ header {
 header h1 {
     color: rgb(70, 122, 236);
     margin: 0;
-    font-size: 30px;
+    font-size: 26px;
 }
 
 
@@ -71,12 +71,12 @@ header h1 {
  .navbar {
     position: relative;
     display: flex;
-    gap: 30px;
+    gap: 18px;
 }
 
 .nav-menu {
     display: flex;
-    gap: 30px;
+    gap: 18px;
 }
 
 .hamburger-button {
@@ -87,7 +87,7 @@ header h1 {
 .logout-button {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     transition: 0.3s;
 }
@@ -114,6 +114,9 @@ header h1 {
 
     .navbar {
         position: relative;
+        margin-left: auto;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
     .hamburger-button {
@@ -127,12 +130,12 @@ header h1 {
     .nav-menu {
         position: absolute;
         top: 100%;
-        right: 0;
+        right:-10px;
         display: none;
         flex-direction: column;
-        gap: 30px;
+        gap: 10px;
         background: rgb(175, 240, 190);
-        padding: 12px 20px;
+        padding: 8px 12px;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         z-index: 1000;
@@ -140,6 +143,7 @@ header h1 {
 
     .nav-menu.open {
         display: flex;
+        position: static;
     }
 
     .nav-menu a,
@@ -148,7 +152,7 @@ header h1 {
     }
 
     .nav-menu a {
-    margin-right: 20px;
+    margin-right: 0;
    }
 }
 
@@ -164,7 +168,7 @@ header h1 {
     }
     .navbar {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     gap: 15px;
     }
 
