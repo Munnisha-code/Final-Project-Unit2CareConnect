@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Final-Project-Unit1-CareConnect/',
+  base: '/Final-Project-CareConnect/',
 })

@@ -39,28 +39,22 @@ function Login(){
                                                  headers: {"Content-Type": "application/json"},
                                                  body: JSON.stringify({email: username,password: password})});
 
-      if (!response.ok) {const backendError = await response.text();
-
-      console.error("Login failed:", {status: response.status,statusText: response.statusText, backendError});
-
-      setError("Invalid email or password.");
+      if (!response.ok) {
+            
+        setError("Invalid email or password.");
           return;
       }
 
       const loginResponse = await response.json();
 
-        console.log("Login successful:", loginResponse);
-
         localStorage.setItem("userId", loginResponse.userId);
-
-        console.log("Current userId:", localStorage.getItem("userId"));
 
       setError("");
 
        navigate("/one-click-send-message");
       } 
 
-     catch (error) {console.error("Login error:", error);
+     catch (error) {
       
       setError("Unable to connect to the server. Please try again.");
       }

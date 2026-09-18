@@ -1,13 +1,7 @@
 
 import './Pages.css';
-
 import React, { useEffect, useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
-
-const userId = localStorage.getItem("userId");
-
-const API_URL = `http://localhost:8080/api/trusted-contacts/user/${userId}`;
 
 
 function TrustedContactForm(){
@@ -22,20 +16,18 @@ const [contacts, setContacts] = useState([{ id: 1, databaseId:null, name: "", mo
                                           { id: 3, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
                                           { id: 4, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, },
                                           { id: 5, databaseId:null, name: "", mobileNumber: "", relationship: "", saved: false, }]);
-   
+const [errorMessage, setErrorMessage] = useState('');
+
    const getContacts = async () => {
     
     try {const response = await fetch(API_URL);
 
-    if (!response.ok) {const backendError = await response.text();
+    if (!response.ok) {
 
-      console.error("GET failed:", {status: response.status,statusText: response.statusText,backendError});
-
-      throw new Error(`Could not load trusted contacts. Status: ${response.status}`);}
+      throw new Error(`Could not load trusted contacts. Status: ${response.status}`);
+    }
 
     const savedContacts = await response.json();
-
-    console.log("Contacts loaded from backend:", savedContacts);
 
     setContacts((currentContacts) => currentContacts.map((card, index) => {
         const savedContact = savedContacts[index];
@@ -53,17 +45,16 @@ const [contacts, setContacts] = useState([{ id: 1, databaseId:null, name: "", mo
                          relationship: savedContact.relationship,
                          saved: true}}));
                         } 
-   catch (error) {
-    console.error("Error loading trusted contacts:", error);
-    alert(error.message);
-  }
+           catch (error) {
+                     setErrorMessage("Could not load trusted contacts. Please try again.");
+            }
 }
 
       useEffect(() => { if (userId) { getContacts();
     } 
       
     else {
-        alert("User ID not found. Please log in again.");
+        setErrorMessage("User ID not found. Please log in again.");
     }
 }, []);
 
@@ -82,45 +73,29 @@ const [contacts, setContacts] = useState([{ id: 1, databaseId:null, name: "", mo
 
 
   if ( !contact.name.trim() || !contact.mobileNumber.trim() || !contact.relationship.trim()) {
-       alert("Please fill Name, Mobile Number, and Relationship");
+       setErrorMessage("Please fill Name, Mobile Number, and Relationship");
        return;
     }
 
       try { const isExistingContact = contact.databaseId !== null && contact.databaseId !== undefined;
-
-        console.log("Contact before saving:", contact);
-        console.log("Request:", isExistingContact ? "PUT" : "POST", isExistingContact ? `${API_URL}/${contact.databaseId}`
-                  : API_URL);
-
-           const response = await fetch(isExistingContact ? `${API_URL}/${contact.databaseId}` : API_URL,{
+ 
+            const response = await fetch(isExistingContact ? `${API_URL}/${contact.databaseId}` : API_URL,{
                    
                method: isExistingContact ? "PUT" : "POST",
                    
-              headers: { "Content-Type": "application/json"},
+               headers: { "Content-Type": "application/json"},
 
-                        body: JSON.stringify({name: contact.name,
-                                              mobileNumber: contact.mobileNumber,
-                                              relationship: contact.relationship })});
+               body: JSON.stringify({name: contact.name,
+                                     mobileNumber: contact.mobileNumber,
+                                     relationship: contact.relationship })});
     if (!response.ok) {
-  const backendError = await response.text();
-
-  console.error("Save failed:", {
-    status: response.status,
-    statusText: response.statusText,
-    backendError
-  });
-
-  throw new Error(`Could not save trusted contact. Status: ${response.status}`);}
+         throw new Error(`Could not save trusted contact. Status: ${response.status}`);
+        }
 
     const savedContact = await response.json();
-    console.log("Saved contact from backend:", savedContact);
 
 if (savedContact.id === null || savedContact.id === undefined) {
-  console.error("Backend response has no 'id':", savedContact);
-
-  throw new Error(
-    "Contact saved, but backend did not return the database ID."
-  );
+  throw new Error("Contact saved, but backend did not return the database ID.");
 }
 
     const updatedContacts = contacts.map((item) => item.id === id ? { ...item, databaseId: savedContact.id,
@@ -131,10 +106,9 @@ if (savedContact.id === null || savedContact.id === undefined) {
 
     setContacts(updatedContacts);
   } 
-  catch (error) {
-    console.error("Error saving contact:", error);
-    alert("Contact was not saved. Please try again.");}
-};
+     catch (error) {
+        setErrorMessage("Contact was not saved. Please try again.");}
+     }
 
 //
      const editContact = (id) => {
@@ -152,7 +126,6 @@ if (savedContact.id === null || savedContact.id === undefined) {
         const contact = contacts.find((item)=>item.id === id);
         
         try{const response = await fetch(`${API_URL}/${contact.databaseId}`, {method: "DELETE"});
-        console.log("Delete status:", response.status);
 
           if (!response.ok) {throw new Error("Could not delete trusted contact");}
 
@@ -165,10 +138,9 @@ if (savedContact.id === null || savedContact.id === undefined) {
             setContacts(updatedContacts); 
            }
 
-        catch (error) { console.error("Error deleting contact:", error);
-                       
-                      alert("Contact was not deleted. Please try again.");
-            }
+             catch (error) {
+                       setErrorMessage("Contact was not deleted. Please try again.");
+             }
         }
  
        
@@ -177,9 +149,9 @@ if (savedContact.id === null || savedContact.id === undefined) {
 
         <div className="trusted-contact-container" >
 
-            <h3 className='trusted-title' > Add Trusted Contacts </h3> 
-
-
+          <h3 className='trusted-title' > Add Trusted Contacts </h3> 
+          
+          {errorMessage && ( <p className="error-message">{errorMessage}</p>)}
 
             <div className ='contact-list' >
                      

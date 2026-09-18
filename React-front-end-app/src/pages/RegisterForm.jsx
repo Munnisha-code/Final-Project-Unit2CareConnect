@@ -8,9 +8,8 @@ const API_URL = "http://localhost:8080/api/users/register";
 function RegisterForm(){
 
     const navigate = useNavigate();
-
     const [ data, setData] = useState({firstName: '',lastName: '',mobileNumber:'', email:'', password:'', confirmPassword:'' });
-
+    const [errorMessage, setErrorMessage] = useState('');
     const {firstName, lastName, mobileNumber, email, password, confirmPassword} = data;
 
     const changeHandler = ev => {
@@ -26,12 +25,12 @@ function RegisterForm(){
                           || !password.trim() 
                           || !confirmPassword.trim()) {
 
-    alert("Please fill in all Provided registration details.");
+    setErrorMessage("Please fill in all Provided registration details.");
     return;
   }
 
   if (password !== confirmPassword) {
-    alert("Password and Confirm Password must match.");
+    setErrorMessage("Password and Confirm Password must match.");
     return;
   }
 
@@ -44,27 +43,17 @@ function RegisterForm(){
 
     if (!response.ok) { const backendError = await response.text();
 
-      console.error("Registration failed:", {
-        status: response.status,
-        statusText: response.statusText,
-        backendError});
-
       throw new Error(`Registration failed. Status: ${response.status}`);
     }
 
     const registeredUser = await response.json();
 
-    console.log("User registered successfully:", registeredUser);
-
     localStorage.setItem("userId", registeredUser.id);
-
-    console.log("Saved userId:", localStorage.getItem("userId"));
 
     navigate("/trusted-contacts");
   } 
    catch (error) {
-    console.error("Registration error:", error);
-    alert(error.message);
+    setErrorMessage(error.message);
   }
          
           

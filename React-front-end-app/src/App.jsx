@@ -1,7 +1,7 @@
 
 import './App.css'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -16,12 +16,21 @@ import ThankYou from './pages/Thankyou';
 import LiveLocation from './pages/LiveLocation';
 
 
+function ProtectedRoute({ children }) {
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+        return <Navigate to="/login" replace />;
+    }
+
+    return children;
+}
+
 function App() {
  
-
   return (
       <>
-       < BrowserRouter basename="/Final-Project-Unit1-CareConnect">
+       < BrowserRouter  basename="/Final-Project-CareConnect" >
 
           <Header/>
 
@@ -34,7 +43,7 @@ function App() {
                 <Route path ="/trusted-contacts" element = {<TrustedContactForm/>} />
                 <Route path = "/one-click-send-message" element = {<OneClickSendMessage/>} />
                 <Route path = "/thank-you" element = {<ThankYou/>} />
-                <Route path = "/live-location" element ={<LiveLocation/>} />
+                <Route path = "/live-location" element ={<ProtectedRoute> <LiveLocation/> </ProtectedRoute>} />
 
             </Routes>
             
