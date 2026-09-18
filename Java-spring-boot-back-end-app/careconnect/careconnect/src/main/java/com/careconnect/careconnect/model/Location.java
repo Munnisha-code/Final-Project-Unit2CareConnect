@@ -12,17 +12,21 @@ public class Location {
     private Long id;
 
     private Long userId;
+    private Long trustedContactId;
     private double latitude;
     private double longitude;
+    private String locationName;
 
     public Location(){
     }
 
-    public Location(Long id, Long userId, double latitude, double longitude) {
+    public Location(Long id, Long userId, Long trustedContactId, double latitude, double longitude, String locationName) {
         this.id = id;
         this.userId = userId;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.trustedContactId = trustedContactId;
+        this.locationName = locationName;
     }
 
     public Long getId() {
@@ -55,5 +59,21 @@ public class Location {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public Long getTrustedContactId() {
+        return trustedContactId;
+    }
+
+    public void setTrustedContactId(Long trustedContactId) {
+        this.trustedContactId = trustedContactId;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 }
