@@ -128,7 +128,7 @@ function LiveLocation(){
                      {contacts.map((contact) => (
                 
                       <button key={contact.id} type="button" 
-                              className={ selectedContact?.id === contact.id ? "contact-card selected": "contact-card"}
+                              className={ selectedContact?.id === contact.id ? "location-contact-card selected": "location-contact-card"}
                         onClick={() => setSelectedContact(contact)}>
 
                        <strong>{contact.name}</strong>
