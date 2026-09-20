@@ -156,7 +156,7 @@ function OneClickSendMessage(){
                                 {trustedContacts.map((contact) => (
                                     <button key={contact.id} type="button"
 
-                                        className={ selectedContact?.id === contact.id ? "contact-card selected" : "contact-card"}
+                                        className={ selectedContact?.id === contact.id ? "message-contact-card selected" : "message-contact-card"}
 
                                         onClick={() => { setSelectedContact(contact); 
                                                          setErrorMessage('');
